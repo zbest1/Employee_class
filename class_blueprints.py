@@ -4,7 +4,7 @@ import datetime
 
 ####################################################################################
 
-class Employee:
+class Employee():
 	
 	num_of_emps = 0
 	raise_amt = 1.04
@@ -13,12 +13,37 @@ class Employee:
 		self.first = first
 		self.last = last
 		self.pay = pay
-		self.email = first + '.' + last + '@company.com'
+		#self.email = first + '.' + last + '@company.com'
 		
 		Employee.num_of_emps += 1
 	
+	@property
+	def email(self):
+		'''
+		We are defining our e-mail as if it is a method 
+		but we can now access it as if it is an atributte.
+		'''
+		return '{}.{}@email.com'.format(self.first, self.last)
+	
+	@property
 	def fullname(self):
 		return '{} {}'.format(self.first, self.last)
+		
+	@fullname.setter
+	def fullname(self, name):
+		'''
+		Now in case a different full name is given after an instance is created 
+		the email last and first name will automaticaly be updated.
+		'''
+		first, last = name.split(' ')
+		self.first = first
+		self.last = last
+	
+	@fullname.deleter
+	def fullname(self):
+		print('Delete Name!')
+		self.first = None
+		self.last = None
 	
 	def apply_raise(self):
 		self.pay = int(self.pay * self.raise_amt)
@@ -91,7 +116,7 @@ class Manager(Employee):
 
 ####################################################################################
 
-runmode = 3
+runmode = 1
 
 if runmode == 1:
 	
@@ -102,7 +127,7 @@ if runmode == 1:
 	emp1 = Employee('Kwstas', 'Rouvalis', 50000)
 	emp2 = Employee('Martin', 'Sinanis', 50000)
 	emp_str_1 = 'Giwrgos-Nanos-70000'
-	emp_3 = Employee.from_string(emp_str_1)
+	emp3 = Employee.from_string(emp_str_1)
 
 	print('Emp1 pay is {}'.format(emp1.pay))
 	emp1.apply_raise()
@@ -112,6 +137,15 @@ if runmode == 1:
 	print('Emp2 pay is {}'.format(emp2.pay))
 	emp2.apply_raise()
 	print('Emp2 pay after raise (for new raise amount) is {}'.format(emp2.pay))
+	
+	emp4 = Employee('Thanos', 'Pnts', 30000)
+	emp4.fullname = 'Thanos Pantos'
+	
+	print(emp4.first)
+	print(emp4.email)
+	print(emp4.fullname)
+	
+	del emp4.fullname
 
 elif runmode == 2:
 	
