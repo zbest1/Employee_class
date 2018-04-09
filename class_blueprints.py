@@ -29,6 +29,12 @@ class Employee:
 	def __str__(self):
 		return '{} - {}'.format(self.fullname(), self.email)
 	
+	def __add__(self, other):
+		"""
+		A special method created inorder to add two employees and get their
+		combined salary.
+		"""
+	
 	@classmethod
 	def set_raise_amt(cls, amount):
 		cls.raise_amt = amount
