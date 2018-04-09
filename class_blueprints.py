@@ -34,6 +34,7 @@ class Employee:
 		A special method created inorder to add two employees and get their
 		combined salary.
 		"""
+		return self.pay + other.pay
 	
 	@classmethod
 	def set_raise_amt(cls, amount):
