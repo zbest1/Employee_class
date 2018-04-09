@@ -23,6 +23,12 @@ class Employee:
 	def apply_raise(self):
 		self.pay = int(self.pay * self.raise_amt)
 	
+	def __repr__(self):
+		return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
+	
+	def __str__(self):
+		return '{} - {}'.format(self.fullname(), self.email)
+	
 	@classmethod
 	def set_raise_amt(cls, amount):
 		cls.raise_amt = amount
